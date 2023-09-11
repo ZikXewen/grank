@@ -1,11 +1,19 @@
 {
   "name": "druzi",
-  "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "build": "bun run build.ts"
+  },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-plugin-dts": "^0.1.0",
+    "bun-types": "latest",
+    "zod": "^3.22.2"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.3.4",
+    "envalid": "^7.3.1"
   }
 }
