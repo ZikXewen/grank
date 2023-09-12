@@ -1,5 +1,5 @@
 {
-  "name": "druzi",
+  "name": "@grank/druzi",
   "type": "module",
   "scripts": {
     "build": "bun run build.ts"

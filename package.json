@@ -1,0 +1,8 @@
+{
+  "name": "grank",
+  "workspaces": [
+    "amis",
+    "pritel",
+    "druzi"
+  ]
+}
