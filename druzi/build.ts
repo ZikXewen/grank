@@ -5,4 +5,6 @@ await Bun.build({
   outdir: "./dist",
   minify: true,
   plugins: [dts()],
-});
+}).then(({ success, logs }) =>
+  console.log(success ? "Build succeeded" : `Build error\n${logs}`),
+);
