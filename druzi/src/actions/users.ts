@@ -3,6 +3,7 @@ import client from "../client";
 type User = {
   userId: string;
   defaultName: string;
+  expireAt: number;
 };
 
 export async function getAllUsers(): Promise<User[]> {
@@ -21,8 +22,8 @@ export async function createUser(
   defaultName: string,
 ): Promise<User> {
   const rs = await client.execute(
-    `insert into users values (${userId}, ${defaultName})`,
+    `insert into users values (${userId}, ${defaultName}, 0`,
   );
   if (rs.rowsAffected !== 1) throw new Error("Failed to create user.");
-  return { userId, defaultName };
+  return { userId, defaultName, expireAt: 0 };
 }
