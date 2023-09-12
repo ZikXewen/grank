@@ -2,6 +2,9 @@
   "name": "@grank/pritel",
   "module": "index.ts",
   "type": "module",
+  "dependencies": {
+    "@grank/druzi": "workspace:*"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },
