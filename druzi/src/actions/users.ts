@@ -1,7 +1,7 @@
 import client from "../client";
 
 type User = {
-  userId: number;
+  userId: string;
   defaultName: string;
 };
 
@@ -10,14 +10,19 @@ export async function getAllUsers(): Promise<User[]> {
   return rs.rows as unknown as User[];
 }
 
-export async function getOrCreateUser(
-  userId: number,
-  defaultName?: string,
-): Promise<User> {
+export async function getUserByUserId(userId: string): Promise<User> {
   const rs = await client.execute(`select * from users where userId=${userId}`);
-  if (rs.rows.length > 0) return rs.rows[0] as unknown as User;
-  if (!defaultName)
-    throw new Error("Could not create user. Default name not specified.");
-  await client.execute(`insert into users values (${userId}, ${defaultName})`);
+  if (rs.rows.length === 0) throw new Error("User not found.");
+  return rs.rows[0] as unknown as User;
+}
+
+export async function createUser(
+  userId: string,
+  defaultName: string,
+): Promise<User> {
+  const rs = await client.execute(
+    `insert into users values (${userId}, ${defaultName})`,
+  );
+  if (rs.rowsAffected !== 1) throw new Error("Failed to create user.");
   return { userId, defaultName };
 }
